@@ -1,0 +1,5 @@
+
+.vscode/settings.json
+karasuba/__pycache__/karasuba.cpython-311.pyc
+karasuba/__pycache__/karasuba_test.cpython-311-pytest-7.2.1.pyc
+*.pyc
