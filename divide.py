@@ -1,35 +1,22 @@
-def recursion_divide(a, b, c):
-    result = ''
-    counter = 0
-
-    while int(b, 2) > int(c, 2):
-        if counter:
-            result += '0'
-
-        if not a:
-            return result
-
-        if c == '0':
-            c = a[0]
-        else:
-            c += a[0]
-
-        a = a[1:]
-        counter += 1
-    
-    result += '1'
-    ost = bin(int(c, 2) - int(b, 2))[2:]
-
-    return result + recursion_divide(a, b, str(ost))
-
-    
-
-
 def divide(x, y):
-    bin_x = bin(x)[2:]
-    bin_y = bin(y)[2:]
+    answer = 0
+
+    if y == 0:
+        raise ZeroDivisionError
+
+    while x and x >= y:
+        temp_x = x
+        counter = 0
+
+        while (temp_x >> 1) > y:
+            counter += 1
+            temp_x = temp_x >> 1
+
+        x = x - y * (2 ** counter)
+        answer += 2 ** counter
+
+    return answer
     
-    return int(recursion_divide(bin_x, bin_y, '0'), 2)
-
-
-print(divide(234, 5))
+for i in range(1, 5000):
+    for j in range(1, 5000):
+        assert i // j == divide(i, j), f"Error: {i // j} != {divide(i, j)}"
