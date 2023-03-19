@@ -17,17 +17,13 @@ def counting_sort(array: list, hash_func, max_element):
 
 def sort_strings(array: list):
     iter = 0
+    return_array = []
 
     def str_hash_func(line: str):
         return ord(line[len(line) - iter - 1])
 
     while iter < len(array[0]):
-        array = counting_sort(array, str_hash_func, "z" * (iter + 1))
+        return_array = counting_sort(array, str_hash_func, "z" * (iter + 1))
         iter += 1
 
-    return array
-
-
-A = ["ac", "ab", "zk", "de", "hi", "pl", "cz", "it"]
-print(sort_strings(A))
-print(sorted(A))
+    return return_array
