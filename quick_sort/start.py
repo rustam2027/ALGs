@@ -4,15 +4,18 @@ import os
 
 MIN_SIZE = 15
 MAX_SIZE = 16
-NUMBER_OF_ITERATIONS = 5
+NUMBER_OF_ITERATIONS = 6
 
-files = ["/branchfree_lomuto",
-         "/standart_hoare",
-         "/standart_lomuto"]
+files = ["branchfree_lomuto",
+         "standart_hoare",
+         "standart_lomuto"]
 
-test_path = "/Users/rustamsalimov/Documents/GitHub/ALGs/quick_sort/test"
+test_path = "test"
 
-output_path = "/Users/rustamsalimov/Documents/GitHub/ALGs/quick_sort/out.txt"
+output_path = "out.txt"
+
+for file in files:
+    sp.run(["gcc", f"{file}.c", "-o", file, "-Ofast"])
 
 array = {}
 
@@ -54,7 +57,7 @@ for size in range(MIN_SIZE, MAX_SIZE):
             input.write("\n")
 
         for file in files:
-            sp.run([f".{file}", test_path])
+            sp.run([f"./{file}", test_path])
             with open(output_path, "r") as output:
                 time = float(output.readline().strip())
 
@@ -69,5 +72,8 @@ for size in range(MIN_SIZE, MAX_SIZE):
 for file in array:
     for size in array[file]:
         array[file][size] = get_geometric_mean(array[file][size])
+
+for file in files:
+    sp.run(["rm", file])
 
 print(array)

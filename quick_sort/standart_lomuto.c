@@ -101,7 +101,7 @@ int get_data(int* nums, FILE* file){
 int main(int argc, char * argv[]){
     FILE* input = fopen(argv[1], "r");
 
-    int* nums = (int*) malloc(sizeof(int) * 10000);
+    int* nums = (int*) malloc(sizeof(int) * 1000000);
 
     int len = get_data(nums, input);
 

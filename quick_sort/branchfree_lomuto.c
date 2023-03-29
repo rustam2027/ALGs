@@ -10,64 +10,50 @@ void print_arr(int* arr, int len){
     printf("\n");
 }
 
-
-void swap(int* nums, int l, int r){
-    int buffer;
-
-    buffer = nums[l];
-    nums[l] = nums[r];
-    nums[r] = buffer;
+void swap(int* first, int* last){
+    int buffer = *first;
+    *first = *last;
+    *last = buffer;
 }
 
 
-int sortArrayRecursion(int* nums, int l, int r){
-    if (r - l <= 0){
-        return 0;
-    } else if (r - l == 1){
-        if (nums[l] > nums[r]){
-            swap(nums, l, r);
-        }
+int sortArrayRecursion(int* first, int* last){
+    if (last - first < 2){
         return 0;
     }
 
-    if (nums[l] > nums[r]){
-        swap(nums, l, r);
+    if (*first > *last){
+        swap(first, last);
     }
 
-    int pivot_pos = l;
-    int pivot = nums[l];
+    int* pivot_pos = first;
+    int pivot = *first;
 
     do {
-        l++;
-    } while(nums[l] < pivot);
+        first++;
+    } while(*first < pivot);
 
-    for (int i = l + 1; i < r; i++){
-        int x = nums[i];
+    for (int* i = first + 1; i < last; i++){
+        int x = *i;
         int smaller = - (int) (x < pivot);
-        int delta = smaller & (i - l);
-        nums[l + delta] = nums[l];
-        nums[i - delta] = x;
-        l -= smaller;
+        int delta = smaller & (i - first);
+        first[delta] = *first;
+        i[-delta] = x;
+        first -= smaller;
     }
-    l --;
-    nums[pivot_pos] = nums[l];
-    nums[l] = pivot;
+    first --;
+    *pivot_pos = *first;
+    *first = pivot;
 
-    sortArrayRecursion(nums, l, pivot_pos);
-    sortArrayRecursion(nums, pivot_pos + 1, r);
+    sortArrayRecursion(first, pivot_pos);
+    sortArrayRecursion(pivot_pos + 1, last);
 
     return 0;
 }
 
 
 void sortArray(int* nums, int numsSize){
-    int* returnNums = (int*) malloc(numsSize * sizeof(int));
-
-    sortArrayRecursion(nums, 0, numsSize - 1);
-
-    for (int i = 0; i < numsSize; i++){
-        returnNums[i] = nums[i];
-    }
+    sortArrayRecursion(nums, nums + numsSize);
 }
 
 
@@ -98,7 +84,7 @@ int get_data(int* nums, FILE* file){
 int main(int argc, char * argv[]){
     FILE* input = fopen(argv[1], "r");
 
-    int* nums = (int*) malloc(sizeof(int) * 10000);
+    int* nums = (int*) malloc(sizeof(int) * 1000000);
 
     int len = get_data(nums, input);
 
@@ -106,7 +92,7 @@ int main(int argc, char * argv[]){
 
     clock_t start = clock();
 
-    sortArray(nums, len + 1);
+    sortArray(nums, len);
 
     clock_t end = clock();
 
