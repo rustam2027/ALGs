@@ -1,4 +1,4 @@
-from LinkedList import ListNode
+from linked_lists.LinkedList import ListNode
 
 
 class Solution:
@@ -45,3 +45,5 @@ head2 = ListNode(1, ListNode(2, ListNode(3, None)))
 a = Solution()
 
 print(a.reverseBetween(head1, 1, 3))
+
+# https://leetcode.com/submissions/detail/926553634/

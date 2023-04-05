@@ -1,4 +1,4 @@
-from LinkedList import ListNode
+from linked_lists.LinkedList import ListNode
 
 
 class Solution:
@@ -22,3 +22,5 @@ class Solution:
                         fast = fast.next
                     first = first.next
         return None
+
+# https://leetcode.com/submissions/detail/925385602/
