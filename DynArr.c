@@ -25,8 +25,8 @@ void init_DynArr(DynArr* ptr){
 }
 
 
-void realloc_DynArr(DynArr* ptr){
-    ptr->cap = ptr->cap * 2;
+void realloc_DynArr(DynArr* ptr, size_t new_cap){
+    ptr->cap = new_cap;
     ptr->value = (int*) realloc(ptr->value, ptr->cap);
     nullcheck(ptr->value);
 }
@@ -34,7 +34,7 @@ void realloc_DynArr(DynArr* ptr){
 
 void add_to_DynArr(DynArr* ptr, int num){
     if(ptr->cap < ptr->len + 1){
-        realloc_DynArr(ptr);
+        realloc_DynArr(ptr, ptr->cap * 2);
     }
     ptr->value[ptr->len++] = num;
 }
@@ -60,9 +60,7 @@ void del_elem_DynArr(DynArr* ptr, size_t i){
     }
     ptr->len -= 1;
     if  (ptr->len <= (ptr->cap / 4)){
-        ptr->cap = ptr->cap / 2;
-        ptr->value = (int*) realloc(ptr->value, ptr->cap);
-        nullcheck(ptr->value);
+        realloc_DynArr(ptr, ptr->cap / 2);
     }
 }
 
