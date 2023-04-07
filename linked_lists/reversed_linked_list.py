@@ -1,4 +1,4 @@
-from linked_lists.LinkedList import ListNode
+from LinkedList import ListNode
 
 
 class Solution:
@@ -14,29 +14,30 @@ class Solution:
             counter += 1
 
         left_connection = current
-        current = current.next
-        counter += 1
-
-        new_head = ListNode(current.val)
-        previous = new_head
-
-        while counter < right:
-            current = current.next
-            new = ListNode(current.val, previous)
-            previous = new
-            counter += 1
-
-        new_head.next = current.next
-        current = current.next
 
         if left > 1:
-            left_connection.next = previous
-        else:
-            new = ListNode(left_connection.val, current)
-            new_head.next = new
-            return previous
+            left_connection = current
+            current = current.next
+            counter += 1
 
-        return head
+        new_tail = current
+        previous = new_tail
+        next_link = current.next
+
+        while counter < right:
+            current = next_link
+            next_link = current.next
+            current.next = previous
+            previous = current
+            counter += 1
+
+        new_tail.next = next_link
+
+        if left > 1:
+            left_connection.next = current
+            return head
+        else:
+            return current
 
 
 head1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, None)))))
@@ -44,6 +45,6 @@ head2 = ListNode(1, ListNode(2, ListNode(3, None)))
 
 a = Solution()
 
-print(a.reverseBetween(head1, 1, 3))
+print(a.reverseBetween(head1, 2, 3))
 
-# https://leetcode.com/submissions/detail/926553634/
+# https://leetcode.com/problems/reverse-linked-list-ii/submissions/929538482/
