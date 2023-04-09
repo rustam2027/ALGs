@@ -92,7 +92,11 @@ void print_DynArr(DynArr* ptr){
         printf("%d", ptr->value[i]);
         printf(", ");
     }
-    printf("%d]\n", ptr->value[i]);
+    if (ptr->len > 0){
+        printf("%d]\n", ptr->value[i]);
+    } else {
+        printf("]\n");
+    }
 }
 
 

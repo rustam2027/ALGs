@@ -31,6 +31,10 @@ int check_stack(Stack* ptr){
     return return_int;
 }
 
+void print_stack(Stack* ptr){
+    print_DynArr(ptr->array);
+}
+
 void free_stack(Stack* ptr){
     free_DynArr(ptr->array);
     free(ptr);
