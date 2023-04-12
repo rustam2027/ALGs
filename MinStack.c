@@ -9,6 +9,7 @@ typedef struct {
 
 MinStack* minStackCreate() {
     MinStack* min_stack = (MinStack*) malloc(sizeof(MinStack));
+    nullcheck(min_stack);
     min_stack->main = init_stack();
     min_stack->min = init_stack();
     return min_stack;

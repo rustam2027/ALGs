@@ -1,18 +1,6 @@
 possible_signs = ('^', '*', '/', '%', '+', '-', "<<", ">>", '&', '|')
 
 
-def find_next_valid_index(array: list) -> int:
-    counter = 1
-    for i in range(len(array) - 1, -1, -1):
-        if array[i] == '(':
-            counter += 1
-        elif array[i] == ')':
-            counter -= 1
-        if not counter:
-            return i
-    return -1
-
-
 def get_polish(expression: list, first: int = 1) -> list:
     if first:
         expression = expression[::-1]

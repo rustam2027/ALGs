@@ -4,7 +4,7 @@ from math import floor
 def sort_array(array: list) -> None:
     N = int((len(array) - 1) / 2) - 1
     sorted_part_index = len(array) - N - 1
-    
+
     assert N != sorted_part_index
 
     std_merge_sort(array, 0, N, sorted_part_index, False)
@@ -21,7 +21,7 @@ def sort_recursion(array: list, sorted_index: int):
                 i += 1
             sorted_index -= 1
         return 0
-    
+
     pivot = int(sorted_index / 2) - 1
 
     std_merge_sort(array, 0, pivot, pivot + 1, 1)
