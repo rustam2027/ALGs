@@ -15,7 +15,7 @@ MinStack* minStackCreate() {
 }
 
 void minStackPush(MinStack* obj, int val) {
-    int pre_min = 2147483647;
+    int pre_min = INT32_MAX;
     if (obj->min->array->len > 0){
         pre_min = check_stack(obj->min);
     }
