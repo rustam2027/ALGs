@@ -1,4 +1,4 @@
-possible_signs = ('^', '*', '/', '%', '+', '-', "<<", ">>", '&', '|')
+possible_signs = ('^', '*', '/', '%', '+', '-', "<<", ">>", '&', '|', '(', ')')
 
 
 def get_polish(expression: list, first: int = 1) -> list:
@@ -13,9 +13,13 @@ def get_polish(expression: list, first: int = 1) -> list:
         if symbol.isdecimal():
             polish.append(symbol)
         elif symbol == '(':
-            polish += get_polish(expression[find_next_valid_index(expression) + 1:], 0)
-            expression = expression[:find_next_valid_index(expression) + 1]
-        elif symbol != ')':
+            signs.append('(')
+        elif symbol == ')':
+            c = signs.pop()
+            while c != '(':
+                polish.append(c)
+                c = signs.pop()
+        else:
             if not signs:
                 signs.append(symbol)
             else:
