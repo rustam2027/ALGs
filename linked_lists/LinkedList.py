@@ -9,3 +9,14 @@ class ListNode:
         return_str += ' '
         return_str += str(self.next)
         return return_str
+
+
+def get_Linked_list(value: list) -> ListNode:
+    value = value[::-1]
+    head = ListNode(value.pop())
+    svd_head = head
+    while value:
+        head.next = ListNode(value.pop())
+        head = head.next
+
+    return svd_head
